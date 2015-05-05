@@ -1,14 +1,15 @@
 defmodule Isn.Base do
-  defmacro __using__(type) do
-    quote bind_quoted: [type: type] do
+  defmacro __using__(isn_type) do
+    quote bind_quoted: [isn_type: isn_type] do
       # @behaviour Ecto.Type
       #
+      @isn_type isn_type
       @moduledoc """
-      Definition for the #{@type} module.
+      Definition for the #{@isn_type} module.
       """
 
       def type,
-        do: type
+        do: @isn_type
 
       defdelegate blank?, to: Ecto.Type
 
