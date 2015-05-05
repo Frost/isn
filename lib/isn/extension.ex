@@ -11,7 +11,7 @@ defmodule Isn.Extension do
     do: Enum.reduce(@isn, [], fn(t, ack) -> ack ++ [type: t] end)
 
   def format(_),
-    do: :string
+    do: :text
 
   def encode(%TypeInfo{type: type}, binary, _types, _opts) when type in @isn,
     do: binary
