@@ -13,6 +13,16 @@ defp deps do
 end
 ```
 
+2. Add the isn extension to your database
+
+```elixir
+{:ok, pid} = Postgrex.Connection.start_link(
+  hostname: "localhost",
+  database: "isn_test"
+)
+Postgrex.Connection.query!(pid, "CREATE EXTENSION isn;", [])
+```
+
 2. Register the postgrex extension
 
 ```elixir
