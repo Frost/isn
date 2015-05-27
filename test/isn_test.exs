@@ -1,4 +1,4 @@
-defmodule IsnExtensionTest do
+defmodule IsnTest do
   use ExUnit.Case, async: true
   import Isn.TestHelper
   alias Postgrex.Connection, as: P
@@ -6,7 +6,7 @@ defmodule IsnExtensionTest do
   setup do
     {:ok, pid} = P.start_link(
       database: "isn_test",
-      extensions: [{Isn.Extension, {}}])
+      extensions: [{Isn, {}}])
     {:ok, [pid: pid]}
   end
 
