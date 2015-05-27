@@ -1,14 +1,78 @@
 # Isn
 
-Add support for the `isn` module in Postgrex/Ecto.
+Isn adds a [`Postgrex.Extension`][1] and [`Ecto.Type`][2] definitions
+for the datatypes defined in the [`isn`][3] PostgreSQL module.
 
-This module adds the following ecto types:
+## Usage
 
-* Isn.ISBN
-* Isn.ISBN13
-* Isn.ISMN
-* Isn.ISMN13
-* Isn.ISSN
-* Isn.ISSN13
-* Isn.EAN13
-* Isn.UPC
+1. Add the package to your Mixfile:
+
+```elixir
+defp deps do
+  [{:isn, "~> 0.1"}]
+end
+```
+
+2. Register the postgrex extension
+
+```elixir
+Postgrex.Connection.start_link(
+  database: "isn_test",
+  extensions: [{Isn, {}}])
+```
+
+3. Start using all of the `isn` goodness in your project.
+
+## Examples
+
+Here are a few small snippets for how to use these types in various
+contexts. I have extracted these snippets from a phoenix project, so
+if you want to use them in something else, you might have to modify them
+a bit.
+
+### Ecto migrations
+
+```elixir
+defmodule MyApp.Repo.Migrations.CreateBook do
+  use Ecto.Migration
+
+  def change do
+    create table(:books) do
+      add :isbn, :isbn13
+      # other fields
+    end
+  end
+end
+```
+
+### Ecto Models
+
+```elixir
+defmodule MyApp.Book do
+  use MyApp.Web, :model
+
+  schema "books" do
+    field :isbn, Isn.ISBN13
+    # other fields
+  end
+end
+```
+
+## Defined types
+
+`Isn` adds the following ecto and corresponding postgrex types:
+
+Ecto.Type    | Postgrex type
+-------------|--------------
+`Isn.ISBN`   | `:isbn`
+`Isn.ISBN13` | `:isbn13`
+`Isn.ISMN`   | `:ismn`
+`Isn.ISMN13` | `:ismn13`
+`Isn.ISSN`   | `:issn`
+`Isn.ISSN13` | `:issn13`
+`Isn.EAN13`  | `:ean13`
+`Isn.UPC`    | `:upc`
+
+[1]: http://hexdocs.pm/postgrex/Postgrex.Extension.html
+[2]: http://hexdocs.pm/ecto/Ecto.Type.html 
+[3]: http://www.postgresql.org/docs/9.4/static/isn.html
