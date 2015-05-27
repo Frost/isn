@@ -33,8 +33,9 @@ defmodule Isn.Mixfile do
   end
 
   defp package do
-    [contributors: ["Martin Frost"],
-     licences: ["MIT"],
+    [files: ~w(lib README.md mix.exs),
+     contributors: ["Martin Frost"],
+     licenses: ["Apache 2.0"],
      links: %{"GitHub" => "https://github.com/Frost/isn"}]
   end
 
