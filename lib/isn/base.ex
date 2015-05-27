@@ -13,8 +13,11 @@ defmodule Isn.Base do
 
       defdelegate blank?, to: Ecto.Type
 
+      def cast(nil), do: :error
       def cast(isn), do: {:ok, to_string(isn)}
+
       def load(isn), do: {:ok, to_string(isn)}
+
       def dump(isn), do: {:ok, to_string(isn)}
     end
   end
