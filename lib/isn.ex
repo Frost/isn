@@ -43,7 +43,7 @@ defmodule Isn do
     do: parameters
 
   def matching(_library),
-    do: Enum.reduce(@isn, [], fn(t, ack) -> ack ++ [type: t] end)
+    do: Enum.zip(Stream.cycle([:type]), @isn)
 
   def format(_),
     do: :text
@@ -71,8 +71,13 @@ defmodule Isn.Base do
   * load/1
   * dump/1
   """
-  defmacro __using__(isn_type) do
-    ecto_type = isn_type |> Atom.to_string |> String.upcase
+  defmacro __using__(_opts) do
+    ecto_type = __CALLER__.module
+                |> Atom.to_string
+                |> String.replace(~r(.+\.), "")
+    isn_type = ecto_type
+               |> String.downcase
+
     quote bind_quoted: [isn_type: isn_type, ecto_type: ecto_type] do
       @behaviour Ecto.Type
       @isn_type isn_type
@@ -107,11 +112,11 @@ defmodule Isn.Base do
   end
 end
 
-defmodule Isn.ISBN,   do: use(Isn.Base, :isbn)
-defmodule Isn.ISMN,   do: use(Isn.Base, :ismn)
-defmodule Isn.ISSN,   do: use(Isn.Base, :issn)
-defmodule Isn.ISBN13, do: use(Isn.Base, :isbn13)
-defmodule Isn.ISMN13, do: use(Isn.Base, :ismn13)
-defmodule Isn.ISSN13, do: use(Isn.Base, :issn13)
-defmodule Isn.UPC,    do: use(Isn.Base, :upc)
-defmodule Isn.EAN13,  do: use(Isn.Base, :ean13)
+defmodule Isn.ISBN,   do: use(Isn.Base)
+defmodule Isn.ISMN,   do: use(Isn.Base)
+defmodule Isn.ISSN,   do: use(Isn.Base)
+defmodule Isn.ISBN13, do: use(Isn.Base)
+defmodule Isn.ISMN13, do: use(Isn.Base)
+defmodule Isn.ISSN13, do: use(Isn.Base)
+defmodule Isn.UPC,    do: use(Isn.Base)
+defmodule Isn.EAN13,  do: use(Isn.Base)
