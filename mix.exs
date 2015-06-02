@@ -42,6 +42,7 @@ defmodule Isn.Mixfile do
   defp deps do
     [{:postgrex, "~> 0.8.1"},
      {:ecto, "~> 0.11.0"},
+     {:eh, "~> 0.2.0"},
      {:ex_doc, "~> 0.6.1", only: :dev}]
   end
 end
