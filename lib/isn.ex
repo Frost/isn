@@ -77,10 +77,10 @@ defmodule Isn.Base do
                 |> String.replace(~r(.+\.), "")
     isn_type = ecto_type
                |> String.downcase
+               |> String.to_atom
 
     quote bind_quoted: [isn_type: isn_type, ecto_type: ecto_type] do
       @behaviour Ecto.Type
-      @isn_type isn_type
 
       @moduledoc """
       Definition for the #{isn_type} module.
@@ -97,8 +97,7 @@ defmodule Isn.Base do
           end
       """
 
-      def type,
-        do: @isn_type
+      def type, do: unquote(isn_type)
 
       defdelegate blank?, to: Ecto.Type
 
