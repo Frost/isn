@@ -1,5 +1,7 @@
 # Isn
 
+[![Build Status](https://semaphoreci.com/api/v1/projects/be7c4c34-c49e-45c7-9320-3fcc4f7f476a/458429/badge.svg)](https://semaphoreci.com/frost/isn)      
+
 Isn adds a [`Postgrex.Extension`][1] and [`Ecto.Type`][2] definitions
 for the datatypes defined in the [`isn`][3] PostgreSQL module.
 
