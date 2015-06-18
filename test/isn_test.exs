@@ -4,9 +4,8 @@ defmodule IsnTest do
   alias Postgrex.Connection, as: P
 
   setup do
-    {:ok, pid} = P.start_link(
-      database: "isn_test",
-      extensions: [{Isn, {}}])
+		options = Keyword.merge(conn_options, [extensions: [{Isn, {}}]])
+    {:ok, pid} = P.start_link(options)
     {:ok, [pid: pid]}
   end
 
