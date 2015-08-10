@@ -43,6 +43,7 @@ defmodule Isn.Mixfile do
     [{:postgrex, "~> 0.9"},
      {:ecto, "~> 0.15"},
      {:eh, "~> 0.2", only: :dev},
-     {:ex_doc, "~> 0.8", only: :dev}]
+     {:ex_doc, "~> 0.8", only: :dev},
+     {:earmark, ">= 0.0.0", only: :dev}]
   end
 end
