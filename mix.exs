@@ -1,7 +1,7 @@
 defmodule Isn.Mixfile do
   use Mix.Project
 
-  @version "0.1.0"
+  @version "0.1.1"
 
   def project do
     [app: :isn,
@@ -23,7 +23,7 @@ defmodule Isn.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    []
+    [applications: [:postgrex]]
   end
 
   defp description do
@@ -40,9 +40,9 @@ defmodule Isn.Mixfile do
   end
 
   defp deps do
-    [{:postgrex, "~> 0.8.1"},
-     {:ecto, "~> 0.11.0"},
-     {:eh, "~> 0.2.0"},
-     {:ex_doc, "~> 0.6.1", only: :dev}]
+    [{:postgrex, "~> 0.9"},
+     {:ecto, "~> 0.15"},
+     {:eh, "~> 0.2", only: :dev},
+     {:ex_doc, "~> 0.8", only: :dev}]
   end
 end
