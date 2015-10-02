@@ -55,67 +55,36 @@ defmodule Isn do
     do: binary
 end
 
-defmodule Isn.Base do
-  @moduledoc """
-  Base module for Isn custom ecto types.
-  """
+for module <- ~w(ISBN ISMN ISSN ISBN13 ISMN13 ISSN13 UPC EAN13) do
+  module_name = Module.concat([Isn, module])
+  ecto_type = module |> String.downcase |> String.to_atom
+  defmodule module_name do
+    @behaviour Ecto.Type
 
-  @doc """
-  Set up basic functionality for an Isn type.
+    @moduledoc """
+    Definition for the #{module_name} module.
 
-  This extends the calling module by defining implementations for
+    How to use this in an Ecto.Model
 
-  * type/0
-  * blank?/0
-  * cast/1
-  * load/1
-  * dump/1
-  """
-  defmacro __using__(_opts) do
-    ecto_type = __CALLER__.module
-                |> Atom.to_string
-                |> String.replace(~r(.+\.), "")
-    isn_type = ecto_type
-               |> String.downcase
-               |> String.to_atom
+    defmodule MyApp.Book do
+    use MyApp.Web, :model
 
-    quote bind_quoted: [isn_type: isn_type, ecto_type: ecto_type] do
-      @behaviour Ecto.Type
-
-      @moduledoc """
-      Definition for the #{isn_type} module.
-
-      How to use this in an Ecto.Model
-
-          defmodule MyApp.Book do
-            use MyApp.Web, :model
-
-            schema "books" do
-              field :#{isn_type}, Isn.#{ecto_type}
-              # other fields
-            end
-          end
-      """
-
-      def type, do: unquote(isn_type)
-
-      defdelegate blank?, to: Ecto.Type
-
-      def cast(nil), do: :error
-      def cast(isn), do: {:ok, to_string(isn)}
-
-      def load(isn), do: {:ok, to_string(isn)}
-
-      def dump(isn), do: {:ok, to_string(isn)}
+    schema "books" do
+    field :#{module_name}, Isn.#{ecto_type}
+    # other fields
     end
+    end
+    """
+
+    def type, do: unquote(ecto_type)
+
+    defdelegate blank?, to: Ecto.Type
+
+    def cast(nil), do: :error
+    def cast(isn), do: {:ok, to_string(isn)}
+
+    def load(isn), do: {:ok, to_string(isn)}
+
+    def dump(isn), do: {:ok, to_string(isn)}
   end
 end
-
-defmodule Isn.ISBN,   do: use(Isn.Base)
-defmodule Isn.ISMN,   do: use(Isn.Base)
-defmodule Isn.ISSN,   do: use(Isn.Base)
-defmodule Isn.ISBN13, do: use(Isn.Base)
-defmodule Isn.ISMN13, do: use(Isn.Base)
-defmodule Isn.ISSN13, do: use(Isn.Base)
-defmodule Isn.UPC,    do: use(Isn.Base)
-defmodule Isn.EAN13,  do: use(Isn.Base)
