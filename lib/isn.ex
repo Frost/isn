@@ -55,9 +55,12 @@ defmodule Isn do
     do: binary
 end
 
+# Generate Ecto.Type modules for all supported data types in the `isn`
+# postgresql module.
 for module <- ~w(ISBN ISMN ISSN ISBN13 ISMN13 ISSN13 UPC EAN13) do
   module_name = Module.concat([Isn, module])
   ecto_type = module |> String.downcase |> String.to_atom
+
   defmodule module_name do
     @behaviour Ecto.Type
 
