@@ -62,18 +62,18 @@ for module <- ~w(ISBN ISMN ISSN ISBN13 ISMN13 ISSN13 UPC EAN13) do
     @behaviour Ecto.Type
 
     @moduledoc """
-    Definition for the #{module_name} module.
+    Definition for the Isn.#{module} module.
 
     How to use this in an Ecto.Model
 
-    defmodule MyApp.Book do
-    use MyApp.Web, :model
+        defmodule MyApp.Book do
+          use MyApp.Web, :model
 
-    schema "books" do
-    field :#{module_name}, Isn.#{ecto_type}
-    # other fields
-    end
-    end
+          schema "books" do
+            field :#{ecto_type}, Isn.#{module}
+            # other fields
+          end
+        end
     """
 
     def type, do: unquote(ecto_type)
