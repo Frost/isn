@@ -42,7 +42,7 @@ defmodule Isn do
   def init(parameters, _opts),
     do: parameters
 
-  def matching(_library),
+  def matching(_),
     do: Enum.zip(Stream.cycle([:type]), @isn)
 
   def format(_),
@@ -80,8 +80,6 @@ for module <- ~w(ISBN ISMN ISSN ISBN13 ISMN13 ISSN13 UPC EAN13) do
     """
 
     def type, do: unquote(ecto_type)
-
-    defdelegate blank?, to: Ecto.Type
 
     def cast(nil), do: :error
     def cast(isn), do: {:ok, to_string(isn)}
