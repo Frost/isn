@@ -1,7 +1,7 @@
 defmodule Isn.Mixfile do
   use Mix.Project
 
-  @version "0.1.1"
+  @version "0.1.2"
 
   def project do
     [app: :isn,
@@ -34,15 +34,16 @@ defmodule Isn.Mixfile do
 
   defp package do
     [files: ~w(lib README.md mix.exs),
-     contributors: ["Martin Frost"],
+     maintainers: ["Martin Frost"],
      licenses: ["Apache 2.0"],
      links: %{"GitHub" => "https://github.com/Frost/isn"}]
   end
 
   defp deps do
-    [{:postgrex, "~> 0.9"},
+    [{:postgrex, ">= 0.9.1"},
      {:ecto, "~> 1.0"},
      {:eh, "~> 0.2", only: :dev},
+     {:credo, "~> 0.1", only: :dev},
      {:ex_doc, "~> 0.10", only: :dev},
      {:earmark, ">= 0.0.0", only: :dev}]
   end
