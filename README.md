@@ -1,6 +1,6 @@
 # Isn
 
-[![Build Status](https://semaphoreci.com/api/v1/projects/be7c4c34-c49e-45c7-9320-3fcc4f7f476a/458429/badge.svg)](https://semaphoreci.com/frost/isn)      
+[![Build Status][4]][5]
 
 Isn adds a [`Postgrex.Extension`][1] and [`Ecto.Type`][2] definitions
 for the datatypes defined in the [`isn`][3] PostgreSQL module.
@@ -8,32 +8,26 @@ for the datatypes defined in the [`isn`][3] PostgreSQL module.
 ## Usage
 
 1. Add the package to your Mixfile:
-
-```elixir
-defp deps do
-  [{:isn, "~> 0.1"}]
-end
-```
-
+    ```elixir
+    defp deps do
+    [{:isn, "~> 0.1"}]
+    end
+    ```
 2. Add the isn extension to your database
-
-```elixir
-{:ok, pid} = Postgrex.Connection.start_link(
-  hostname: "localhost",
-  database: "isn_test"
-)
-Postgrex.Connection.query!(pid, "CREATE EXTENSION isn;", [])
-```
-
-2. Register the postgrex extension
-
-```elixir
-Postgrex.Connection.start_link(
-  database: "isn_test",
-  extensions: [{Isn, {}}])
-```
-
-3. Start using all of the `isn` goodness in your project.
+    ```elixir
+    {:ok, pid} = Postgrex.Connection.start_link(
+    hostname: "localhost",
+    database: "isn_test"
+    )
+    Postgrex.Connection.query!(pid, "CREATE EXTENSION isn;", [])
+    ```
+3. Register the postgrex extension
+    ```elixir
+    Postgrex.Connection.start_link(
+    database: "isn_test",
+    extensions: [{Isn, {}}])
+    ```
+4. Start using all of the `isn` goodness in your project.
 
 ## Examples
 
@@ -86,5 +80,7 @@ Ecto.Type    | Postgrex type
 `Isn.UPC`    | `:upc`
 
 [1]: http://hexdocs.pm/postgrex/Postgrex.Extension.html
-[2]: http://hexdocs.pm/ecto/Ecto.Type.html 
+[2]: http://hexdocs.pm/ecto/Ecto.Type.html
 [3]: http://www.postgresql.org/docs/9.4/static/isn.html
+[4]: https://semaphoreci.com/api/v1/projects/be7c4c34-c49e-45c7-9320-3fcc4f7f476a/458429/badge.svg
+[5]: https://semaphoreci.com/frost/isn
