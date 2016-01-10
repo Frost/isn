@@ -52,8 +52,8 @@ end
 3. Register the postgrex extension in your Repo config
     ```elixir
     config :books, MyApp.Repo,
-    adapter: Ecto.Adapters.Postgres,
-    extensions: [{ISN, []}]
+      adapter: Ecto.Adapters.Postgres,
+      extensions: [{ISN, []}]
 
     ```
 
