@@ -53,7 +53,7 @@ end
     ```elixir
     config :books, MyApp.Repo,
     adapter: Ecto.Adapters.Postgres,
-    extensions: [{Isn, []}]
+    extensions: [{ISN, []}]
 
     ```
 
