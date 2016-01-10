@@ -37,25 +37,24 @@ end
 
 ## Installation
 
-1. Add the package to your Mixfile:
-   ```elixir
-   defp deps do
-     [{:isn, "~> 0.1"}]
-   end
-   ```
+**Add the package to your Mixfile**
 
-2. Add the isn extension to your database
-   ```
-   mix do isn.gen.migration, ecto.migrate
-   ```
+```elixir
+defp deps do
+  [{:isn, "~> 1.0"}]
+end
+```
 
-3. Register the postgrex extension in your Repo config
-    ```elixir
-    config :books, MyApp.Repo,
-      adapter: Ecto.Adapters.Postgres,
-      extensions: [{ISN, []}]
+**Add the isn extension to your database**
 
-    ```
+    mix do isn.gen.migration, ecto.migrate
+
+**Register the postgrex extension in your Repo config**
+```elixir
+config :books, MyApp.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  extensions: [{ISN, []}]
+```
 
 ## Defined types
 
