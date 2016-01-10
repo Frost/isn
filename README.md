@@ -7,35 +7,6 @@ for the datatypes defined in the [`isn`][3] PostgreSQL module.
 
 ## Usage
 
-1. Add the package to your Mixfile:
-    ```elixir
-    defp deps do
-    [{:isn, "~> 0.1"}]
-    end
-    ```
-2. Add the isn extension to your database
-    ```elixir
-    {:ok, pid} = Postgrex.Connection.start_link(
-    hostname: "localhost",
-    database: "isn_test"
-    )
-    Postgrex.Connection.query!(pid, "CREATE EXTENSION isn;", [])
-    ```
-3. Register the postgrex extension
-    ```elixir
-    Postgrex.Connection.start_link(
-    database: "isn_test",
-    extensions: [{ISN, {}}])
-    ```
-4. Start using all of the `isn` goodness in your project.
-
-## Examples
-
-Here are a few small snippets for how to use these types in various
-contexts. I have extracted these snippets from a phoenix project, so
-if you want to use them in something else, you might have to modify them
-a bit.
-
 ### Ecto migrations
 
 ```elixir
@@ -63,6 +34,28 @@ defmodule MyApp.Book do
   end
 end
 ```
+
+## Installation
+
+1. Add the package to your Mixfile:
+   ```elixir
+   defp deps do
+     [{:isn, "~> 0.1"}]
+   end
+   ```
+
+2. Add the isn extension to your database
+   ```
+   mix do isn.gen.migration, ecto.migrate
+   ```
+
+3. Register the postgrex extension in your Repo config
+    ```elixir
+    config :books, MyApp.Repo,
+    adapter: Ecto.Adapters.Postgres,
+    extensions: [{Isn, []}]
+
+    ```
 
 ## Defined types
 
