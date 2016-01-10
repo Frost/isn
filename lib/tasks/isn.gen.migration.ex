@@ -32,7 +32,7 @@ defmodule Mix.Tasks.Isn.Gen.Migration do
     "#{y}#{pad(m)}#{pad(d)}#{pad(hh)}#{pad(mm)}#{pad(ss)}"
   end
 
-  defp pad(s), do: to_string(s) |> String.rjust(2, ?0)
+  defp pad(s), do: s |> to_string() |> String.rjust(2, ?0)
 
   embed_template :migration, """
   defmodule <%= inspect @mod %> do
