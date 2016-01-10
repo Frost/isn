@@ -18,7 +18,7 @@ ExUnit.start()
 # {:ok, pid} = Postgrex.Connection.start_link(conn_options)
 # Postgrex.Connection.query!(pid, "CREATE EXTENSION isn;", [])
 
-defmodule Isn.TestHelper do
+defmodule ISN.TestHelper do
 	def conn_options do
 		db_options = [ 
       sync_connect: true,
@@ -47,12 +47,12 @@ defmodule Isn.TestHelper do
   end
 end
 
-db_options = Keyword.merge(Isn.TestHelper.conn_options, [database: "postgres"])
+db_options = Keyword.merge(ISN.TestHelper.conn_options, [database: "postgres"])
 {:ok, pid} = Postgrex.Connection.start_link(db_options)
 
 Postgrex.Connection.query!(pid, "DROP DATABASE IF EXISTS isn_test;", [])
 Postgrex.Connection.query!(pid, "CREATE DATABASE isn_test;", [])
 Postgrex.Connection.stop(pid)
-{:ok, pid} = Postgrex.Connection.start_link(Isn.TestHelper.conn_options)
+{:ok, pid} = Postgrex.Connection.start_link(ISN.TestHelper.conn_options)
 Postgrex.Connection.query!(pid, "CREATE EXTENSION isn;", [])
 Postgrex.Connection.stop(pid)

@@ -1,10 +1,10 @@
-defmodule IsnTest do
+defmodule ISNTest do
   use ExUnit.Case, async: true
-  import Isn.TestHelper
+  import ISN.TestHelper
   alias Postgrex.Connection, as: P
 
   setup do
-    options = Keyword.merge(conn_options, [extensions: [{Isn, {}}]])
+    options = Keyword.merge(conn_options, [extensions: [{ISN, {}}]])
     {:ok, pid} = P.start_link(options)
     {:ok, [pid: pid]}
   end

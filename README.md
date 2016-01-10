@@ -1,8 +1,8 @@
-# Isn
+# ISN
 
 [![Build Status][4]][5]
 
-Isn adds a [`Postgrex.Extension`][1] and [`Ecto.Type`][2] definitions
+ISN adds a [`Postgrex.Extension`][1] and [`Ecto.Type`][2] definitions
 for the datatypes defined in the [`isn`][3] PostgreSQL module.
 
 ## Usage
@@ -25,7 +25,7 @@ for the datatypes defined in the [`isn`][3] PostgreSQL module.
     ```elixir
     Postgrex.Connection.start_link(
     database: "isn_test",
-    extensions: [{Isn, {}}])
+    extensions: [{ISN, {}}])
     ```
 4. Start using all of the `isn` goodness in your project.
 
@@ -58,7 +58,7 @@ defmodule MyApp.Book do
   use MyApp.Web, :model
 
   schema "books" do
-    field :isbn, Isn.ISBN13
+    field :isbn, ISN.ISBN13
     # other fields
   end
 end
@@ -66,18 +66,18 @@ end
 
 ## Defined types
 
-`Isn` adds the following ecto and corresponding postgrex types:
+`ISN` adds the following ecto and corresponding postgrex types:
 
 Ecto.Type    | Postgrex type
 -------------|--------------
-`Isn.ISBN`   | `:isbn`
-`Isn.ISBN13` | `:isbn13`
-`Isn.ISMN`   | `:ismn`
-`Isn.ISMN13` | `:ismn13`
-`Isn.ISSN`   | `:issn`
-`Isn.ISSN13` | `:issn13`
-`Isn.EAN13`  | `:ean13`
-`Isn.UPC`    | `:upc`
+`ISN.ISBN`   | `:isbn`
+`ISN.ISBN13` | `:isbn13`
+`ISN.ISMN`   | `:ismn`
+`ISN.ISMN13` | `:ismn13`
+`ISN.ISSN`   | `:issn`
+`ISN.ISSN13` | `:issn13`
+`ISN.EAN13`  | `:ean13`
+`ISN.UPC`    | `:upc`
 
 [1]: http://hexdocs.pm/postgrex/Postgrex.Extension.html
 [2]: http://hexdocs.pm/ecto/Ecto.Type.html

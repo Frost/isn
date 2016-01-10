@@ -1,4 +1,4 @@
-defmodule Isn.Mixfile do
+defmodule ISN.Mixfile do
   use Mix.Project
 
   @version "0.1.2"
@@ -13,7 +13,7 @@ defmodule Isn.Mixfile do
      description: description,
      package: package,
      # Docs
-     name: "Isn",
+     name: "ISN",
      docs: [source_ref: "v#{@version}",
             source_url: "https://github.com/Frost/isn"]
    ]

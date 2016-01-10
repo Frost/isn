@@ -1,4 +1,4 @@
-defmodule Isn do
+defmodule ISN do
   alias Postgrex.TypeInfo
 
   @behaviour Postgrex.Extension
@@ -12,7 +12,7 @@ defmodule Isn do
 
       Postgrex.Connection.start_link(
         database: "isn_test",
-        extensions: [{Isn, {}}])
+        extensions: [{ISN, {}}])
 
   Then you can do Ecto.Migrations like this:
 
@@ -33,7 +33,7 @@ defmodule Isn do
         use MyApp.Web, :model
 
         schema "books" do
-          field :isbn, Isn.ISBN13
+          field :isbn, ISN.ISBN13
           # other fields
         end
       end
@@ -58,14 +58,14 @@ end
 # Generate Ecto.Type modules for all supported data types in the `isn`
 # postgresql module.
 for module <- ~w(ISBN ISMN ISSN ISBN13 ISMN13 ISSN13 UPC EAN13) do
-  module_name = Module.concat([Isn, module])
+  module_name = Module.concat([ISN, module])
   ecto_type = module |> String.downcase |> String.to_atom
 
   defmodule module_name do
     @behaviour Ecto.Type
 
     @moduledoc """
-    Definition for the Isn.#{module} module.
+    Definition for the ISN.#{module} module.
 
     How to use this in an Ecto.Model
 
@@ -73,7 +73,7 @@ for module <- ~w(ISBN ISMN ISSN ISBN13 ISMN13 ISSN13 UPC EAN13) do
           use MyApp.Web, :model
 
           schema "books" do
-            field :#{ecto_type}, Isn.#{module}
+            field :#{ecto_type}, ISN.#{module}
             # other fields
           end
         end
