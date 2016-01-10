@@ -15,7 +15,8 @@ defmodule ISN.Mixfile do
      # Docs
      name: "ISN",
      docs: [source_ref: "v#{@version}",
-            source_url: "https://github.com/Frost/isn"]
+            source_url: "https://github.com/Frost/isn",
+            extras: ["README.md"]]
    ]
   end
 
@@ -43,7 +44,6 @@ defmodule ISN.Mixfile do
     [{:postgrex, ">= 0.9.1"},
      {:ecto, "~> 1.0"},
      {:credo, "~> 0.1", only: :dev},
-     {:ex_doc, "~> 0.10", only: :dev},
-     {:earmark, ">= 0.0.0", only: :dev}]
+     {:ex_doc, "~> 0.10", only: :dev}]
   end
 end
