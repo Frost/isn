@@ -1,7 +1,7 @@
 defmodule ISN.Mixfile do
   use Mix.Project
 
-  @version "1.0.0"
+  @version "1.0.1"
 
   def project do
     [app: :isn,
@@ -42,7 +42,7 @@ defmodule ISN.Mixfile do
 
   defp deps do
     [{:postgrex, ">= 0.9.1"},
-     {:ecto, "~> 1.0"},
+     {:ecto, ">= 1.0.0"},
      {:credo, "~> 0.1", only: :dev},
      {:ex_doc, "~> 0.10", only: :dev}]
   end

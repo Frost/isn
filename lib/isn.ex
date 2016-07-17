@@ -10,7 +10,7 @@ defmodule ISN do
 
   Add this module as an extension when establishing your Postgrex connection:
 
-      Postgrex.Connection.start_link(
+      Postgrex.start_link(
         database: "isn_test",
         extensions: [{ISN, {}}])
 

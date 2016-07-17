@@ -1,7 +1,7 @@
 defmodule ISNTest do
   use ExUnit.Case, async: true
   import ISN.TestHelper
-  alias Postgrex.Connection, as: P
+  alias Postgrex, as: P
 
   setup do
     options = Keyword.merge(conn_options, [extensions: [{ISN, {}}]])
