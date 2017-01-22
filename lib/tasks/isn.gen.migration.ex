@@ -19,7 +19,7 @@ defmodule Mix.Tasks.Isn.Gen.Migration do
   def run(args) do
     Mix.Task.run "app.start", args
     [repo] = parse_repo(args)
-    filename = "#{timestamp}_create_isn_extension.exs"
+    filename = "#{timestamp()}_create_isn_extension.exs"
     path = Path.relative_to(migrations_path(repo), Mix.Project.app_path)
     file = Path.join(path, filename)
     create_directory(path)

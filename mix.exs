@@ -7,11 +7,11 @@ defmodule ISN.Mixfile do
     [app: :isn,
      version: @version,
      elixir: "~> 1.0",
-     deps: deps,
+     deps: deps(),
      test_paths: ["test"],
      # Hex
-     description: description,
-     package: package,
+     description: description(),
+     package: package(),
      # Docs
      name: "ISN",
      docs: [source_ref: "v#{@version}",

@@ -4,7 +4,7 @@ defmodule ISNTest do
   alias Postgrex, as: P
 
   setup do
-    options = Keyword.merge(conn_options, [extensions: [{ISN, {}}]])
+    options = Keyword.merge(conn_options(), [extensions: [{ISN, {}}]])
     {:ok, pid} = P.start_link(options)
     {:ok, [pid: pid]}
   end
@@ -49,4 +49,3 @@ defmodule ISNTest do
            query(context[:pid], "SELECT $1::upc", ["220356483481"])
   end
 end
-
