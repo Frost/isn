@@ -39,8 +39,7 @@ defmodule ISN do
       end
   """
 
-  def init(parameters, _opts),
-    do: parameters
+  def init(opts) when opts in [:copy, :reference], do: opts
 
   def matching(_),
     do: Enum.zip(Stream.cycle([:type]), @isn)
@@ -48,11 +47,25 @@ defmodule ISN do
   def format(_),
     do: :text
 
-  def encode(%TypeInfo{type: type}, binary, _types, _opts) when type in @isn,
-    do: binary
+  def encode(opts) do
+    quote do
+      thing ->
+        [<<IO.iodata_length(thing) :: int32>> | thing]
+    end
+  end
 
-  def decode(%TypeInfo{type: type}, binary, _types, _opts) when type in @isn,
-    do: binary
+  def decode(:copy) do
+    quote do
+      <<len :: int32, thing::binary-size(len)>> ->
+        :binary.copy(thing)
+    end
+  end
+  def decode(:reference) do
+    quote do
+      <<len :: int32, thing::binary-size(len)>> ->
+        thing
+    end
+  end
 end
 
 # Generate Ecto.Type modules for all supported data types in the `isn`

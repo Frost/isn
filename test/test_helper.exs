@@ -1,21 +1,32 @@
 ExUnit.start()
+Postgrex.Types.define(
+  ISN.PostgrexTypes,
+  [{ISN, :reference}],
+  [])
 
 defmodule ISN.TestHelper do
   def conn_options do
     db_options = [
       sync_connect: true,
       hostname: "localhost",
+      types: ISN.PostgrexTypes,
       database: "isn_test"]
 
     db_user = System.get_env("DATABASE_POSTGRESQL_USERNAME")
     db_pass = System.get_env("DATABASE_POSTGRESQL_PASSWORD")
 
     db_options =
-      if db_user, do: db_options = Dict.put(db_options, :username, db_user),
-      else: db_options
+      if db_user do
+        Map.put(db_options, :username, db_user)
+      else
+        db_options
+      end
     db_options =
-      if db_pass, do: db_options = Dict.put(db_options, :password, db_pass),
-      else: db_options
+      if db_pass do
+        Map.put(db_options, :password, db_pass)
+      else
+        db_options
+      end
 
     db_options
   end
