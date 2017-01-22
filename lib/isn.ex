@@ -1,6 +1,4 @@
 defmodule ISN do
-  alias Postgrex.TypeInfo
-
   @behaviour Postgrex.Extension
   @isn ~w(ean13 isbn13 ismn13 issn13 isbn ismn issn upc)
 
@@ -47,7 +45,7 @@ defmodule ISN do
   def format(_),
     do: :text
 
-  def encode(opts) do
+  def encode(_opts) do
     quote do
       thing ->
         [<<IO.iodata_length(thing) :: int32>> | thing]

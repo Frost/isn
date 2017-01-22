@@ -25,4 +25,3 @@ use Mix.Config
 #
 #     import_config "#{Mix.env}.exs"
 
-config :ex_doc, :markdown_processor, ExDoc.Markdown.Pandoc
