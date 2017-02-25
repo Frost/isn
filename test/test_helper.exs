@@ -17,13 +17,13 @@ defmodule ISN.TestHelper do
 
     db_options =
       if db_user do
-        Map.put(db_options, :username, db_user)
+        Keyword.put(db_options, :username, db_user)
       else
         db_options
       end
     db_options =
       if db_pass do
-        Map.put(db_options, :password, db_pass)
+        Keyword.put(db_options, :password, db_pass)
       else
         db_options
       end
