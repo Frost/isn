@@ -1,7 +1,7 @@
 ExUnit.start()
 Postgrex.Types.define(
   ISN.PostgrexTypes,
-  [{ISN, :reference}],
+  [ISN],
   [])
 
 defmodule ISN.TestHelper do
