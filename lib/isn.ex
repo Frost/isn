@@ -6,7 +6,7 @@ defmodule ISN do
   A Postgrex.Extension enabling the use of postgresql data types from the isn
   extension.
 
-  In lib/ directory create a file called postgrex_types.ex with the following content:
+  In lib/ directory create a file with the following content:
 
     Postgrex.Types.define(
       MyApp.PostgrexTypes,
