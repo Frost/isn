@@ -6,11 +6,18 @@ defmodule ISN do
   A Postgrex.Extension enabling the use of postgresql data types from the isn
   extension.
 
-  Add this module as an extension when establishing your Postgrex connection:
+  In lib/ directory create a file with the following content:
 
-      Postgrex.start_link(
-        database: "isn_test",
-        extensions: [{ISN, {}}])
+    Postgrex.Types.define(
+      MyApp.PostgrexTypes,
+      [ISN] ++ Ecto.Adapters.Postgres.extensions(),
+      json: Poison
+    )
+
+  Add the following lines in conig.exs:
+
+    config :my_app, MyApp.Repo,
+      types: MyApp.PostgrexTypes
 
   Then you can do Ecto.Migrations like this:
 
@@ -31,13 +38,13 @@ defmodule ISN do
         use MyApp.Web, :model
 
         schema "books" do
-          field :isbn, ISN.ISBN13
+          field :isbn, ISN.ISBN13, read_after_writes: true
           # other fields
         end
       end
   """
 
-  def init(opts) when opts in [:copy, :reference], do: opts
+  def init(opts), do: Keyword.get(opts, :decode_copy, :reference)
 
   def matching(_),
     do: Enum.zip(Stream.cycle([:type]), @isn)

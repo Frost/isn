@@ -29,7 +29,7 @@ defmodule MyApp.Book do
   use MyApp.Web, :model
 
   schema "books" do
-    field :isbn, ISN.ISBN13
+    field :isbn, ISN.ISBN13, read_after_writes: true
     # other fields
   end
 end
@@ -49,11 +49,19 @@ end
 
     mix do isn.gen.migration, ecto.migrate
 
-**Register the postgrex extension in your Repo config**
+**In lib/ directory create a file with the following content:**
 ```elixir
-config :books, MyApp.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  extensions: [{ISN, []}]
+Postgrex.Types.define(
+  MyApp.PostgrexTypes,
+  [ISN] ++ Ecto.Adapters.Postgres.extensions(),
+  json: Poison
+)
+```
+
+**Add the following lines in conig.exs:**
+```elixir
+config :my_app, MyApp.Repo,
+  types: MyApp.PostgrexTypes
 ```
 
 ## Defined types
