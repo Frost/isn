@@ -16,5 +16,3 @@ defmodule ISN.UPCTest do
     assert ISN.UPC.dump(@test_upc) == {:ok, @test_upc}
   end
 end
-
-

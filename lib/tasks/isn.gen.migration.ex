@@ -17,10 +17,10 @@ defmodule Mix.Tasks.Isn.Gen.Migration do
 
   @doc false
   def run(args) do
-    Mix.Task.run "app.start", args
+    Mix.Task.run("app.start", args)
     [repo] = parse_repo(args)
     filename = "#{timestamp()}_create_isn_extension.exs"
-    path = Path.relative_to(migrations_path(repo), Mix.Project.app_path)
+    path = Path.relative_to(migrations_path(repo), Mix.Project.app_path())
     file = Path.join(path, filename)
     create_directory(path)
     mod = Module.concat([repo, Migrations, @migration_name])
@@ -32,9 +32,9 @@ defmodule Mix.Tasks.Isn.Gen.Migration do
     "#{y}#{pad(m)}#{pad(d)}#{pad(hh)}#{pad(mm)}#{pad(ss)}"
   end
 
-  defp pad(s), do: s |> to_string() |> String.rjust(2, ?0)
+  defp pad(s), do: s |> to_string() |> String.pad_leading(2, ?0)
 
-  embed_template :migration, """
+  embed_template(:migration, """
   defmodule <%= inspect @mod %> do
     use Ecto.Migration
 
@@ -46,5 +46,5 @@ defmodule Mix.Tasks.Isn.Gen.Migration do
       execute "DROP EXTENSION IF EXISTS isn;"
     end
   end
-  """
+  """)
 end

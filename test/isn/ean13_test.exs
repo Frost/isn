@@ -16,4 +16,3 @@ defmodule ISN.EAN13Test do
     assert ISN.EAN13.dump(@test_ean) == {:ok, @test_ean}
   end
 end
-

@@ -16,4 +16,3 @@ defmodule ISN.ISMNTest do
     assert ISN.ISMN.dump(@test_ismn) == {:ok, @test_ismn}
   end
 end
-

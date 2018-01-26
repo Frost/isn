@@ -46,28 +46,27 @@ defmodule ISN do
 
   def init(opts), do: Keyword.get(opts, :decode_copy, :reference)
 
-  def matching(_),
-    do: Enum.zip(Stream.cycle([:type]), @isn)
+  def matching(_), do: Enum.zip(Stream.cycle([:type]), @isn)
 
-  def format(_),
-    do: :text
+  def format(_), do: :text
 
   def encode(_opts) do
     quote do
       thing ->
-        [<<IO.iodata_length(thing) :: int32>> | thing]
+        [<<IO.iodata_length(thing)::int32>> | thing]
     end
   end
 
   def decode(:copy) do
     quote do
-      <<len :: int32, thing::binary-size(len)>> ->
+      <<len::int32, thing::binary-size(len)>> ->
         :binary.copy(thing)
     end
   end
+
   def decode(:reference) do
     quote do
-      <<len :: int32, thing::binary-size(len)>> ->
+      <<len::int32, thing::binary-size(len)>> ->
         thing
     end
   end
@@ -77,7 +76,7 @@ end
 # postgresql module.
 for module <- ~w(ISBN ISMN ISSN ISBN13 ISMN13 ISSN13 UPC EAN13) do
   module_name = Module.concat([ISN, module])
-  ecto_type = module |> String.downcase |> String.to_atom
+  ecto_type = module |> String.downcase() |> String.to_atom()
 
   defmodule module_name do
     @behaviour Ecto.Type

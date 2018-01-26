@@ -16,4 +16,3 @@ defmodule ISN.ISBNTest do
     assert ISN.ISBN.dump(@test_isbn) == {:ok, @test_isbn}
   end
 end
-
