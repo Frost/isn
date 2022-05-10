@@ -1,6 +1,7 @@
 defmodule Mix.Tasks.Isn.Gen.Migration do
   use Mix.Task
   import Mix.Ecto
+  import Mix.EctoSQL
   import Mix.Generator
 
   @migration_name "CreateISNExtension"
@@ -18,21 +19,17 @@ defmodule Mix.Tasks.Isn.Gen.Migration do
   @doc false
   def run(args) do
     Mix.Task.run("app.start", args)
-    [repo] = parse_repo(args)
-    filename = "#{timestamp()}_create_isn_extension.exs"
-    path = Path.relative_to(migrations_path(repo), Mix.Project.app_path())
-    file = Path.join(path, filename)
-    create_directory(path)
-    mod = Module.concat([repo, Migrations, @migration_name])
-    create_file(file, migration_template(mod: mod))
-  end
+    now = Calendar.strftime(DateTime.utc_now(), "%Y%m%d%H%M%S")
 
-  defp timestamp do
-    {{y, m, d}, {hh, mm, ss}} = :calendar.universal_time()
-    "#{y}#{pad(m)}#{pad(d)}#{pad(hh)}#{pad(mm)}#{pad(ss)}"
+    with [repo] <- parse_repo(args),
+         filename <- "#{now}_create_isn_extension.exs",
+         path <- Path.join(source_repo_priv(repo), "migrations"),
+         file <- Path.join(path, filename),
+         mod <- Module.concat([repo, Migrations, @migration_name]) do
+      create_directory(path)
+      create_file(file, migration_template(mod: mod))
+    end
   end
-
-  defp pad(s), do: s |> to_string() |> String.pad_leading(2, ?0)
 
   embed_template(:migration, """
   defmodule <%= inspect @mod %> do
