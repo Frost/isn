@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: harmon758/postgresql-action@v1
+      with:
+        postgresql version: '14'  # See https://hub.docker.com/_/postgres for available versions
     - uses: actions/checkout@v3
     - name: Set up Elixir
       uses: erlef/setup-beam@988e02bfe678367a02564f65ca2e37726dc0268f
