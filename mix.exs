@@ -27,7 +27,7 @@ defmodule ISN.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:postgrex, :ecto]]
+    [applications: [:postgrex, :ecto, :ecto_sql]]
   end
 
   defp description do
@@ -47,10 +47,12 @@ defmodule ISN.Mixfile do
 
   defp deps do
     [
-      {:postgrex, ">= 0.13.2"},
-      {:ecto, ">= 2.1.4"},
-      {:credo, "~> 0.7", only: :dev},
-      {:ex_doc, "~> 0.15", only: :dev}
+      {:postgrex, "~> 0.16"},
+      {:ecto, "~> 3.0"},
+      {:ecto_sql, "~> 3.0"},
+      {:credo, "~> 1.0", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.15", only: :dev, runtime: false},
+      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
     ]
   end
 end
