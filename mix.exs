@@ -7,7 +7,7 @@ defmodule ISN.Mixfile do
     [
       app: :isn,
       version: @version,
-      elixir: "~> 1.0",
+      elixir: "~> 1.9",
       deps: deps(),
       test_paths: ["test"],
       # Hex
