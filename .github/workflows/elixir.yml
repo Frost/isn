@@ -11,18 +11,15 @@ jobs:
 
     name: Build and test
     runs-on: ubuntu-latest
-    env:
-      POSTGRES_DB: isn_test
-      POSTGRES_USER: isn
-      POSTGRES_PASSWORD: isn_secret_test_password
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: secret
+        ports:
+          - 5432:5432
 
     steps:
-    - uses: harmon758/postgresql-action@v1
-      with:
-        postgresql version: '14'  # See https://hub.docker.com/_/postgres for available versions
-        postgresql db: ${{ env.POSTGRES_DB }}
-        postgresql user: ${{ env.POSTGRES_USER }}
-        postgresql password: ${{ env.POSTGRES_PASSWORD }}
     - uses: actions/checkout@v3
     - name: Set up Elixir
       uses: erlef/setup-beam@988e02bfe678367a02564f65ca2e37726dc0268f
@@ -39,3 +36,7 @@ jobs:
       run: mix deps.get
     - name: Run tests
       run: mix test
+      env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
+        POSTGRES_PASSWORD: secret
