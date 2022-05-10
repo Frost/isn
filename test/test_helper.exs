@@ -10,8 +10,8 @@ defmodule ISN.TestHelper do
       database: "isn_test"
     ]
 
-    db_user = System.get_env("DATABASE_POSTGRESQL_USERNAME")
-    db_pass = System.get_env("DATABASE_POSTGRESQL_PASSWORD")
+    db_user = System.get_env("POSTGRES_USER")
+    db_pass = System.get_env("POSTGRES_PASSWORD")
 
     db_options =
       if db_user do
