@@ -49,16 +49,12 @@ end
 
     mix do isn.gen.migration, ecto.migrate
 
-**In lib/ directory create a file with the following content:**
+**Add a lib/postgrex_types.ex file with the following content:**
 ```elixir
-Postgrex.Types.define(
-  MyApp.PostgrexTypes,
-  [ISN] ++ Ecto.Adapters.Postgres.extensions(),
-  json: Poison
-)
+Postgrex.Types.define(MyApp.PostgrexTypes, [ISN], [])
 ```
 
-**Add the following lines in conig.exs:**
+**Add the following lines in config.exs:**
 ```elixir
 config :my_app, MyApp.Repo,
   types: MyApp.PostgrexTypes

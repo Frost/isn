@@ -8,11 +8,7 @@ defmodule ISN do
 
   In lib/ directory create a file with the following content:
 
-    Postgrex.Types.define(
-      MyApp.PostgrexTypes,
-      [ISN] ++ Ecto.Adapters.Postgres.extensions(),
-      json: Poison
-    )
+    Postgrex.Types.define(MyApp.PostgrexTypes, [ISN], [])
 
   Add the following lines in conig.exs:
 
