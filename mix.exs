@@ -40,7 +40,7 @@ defmodule ISN.Mixfile do
     [
       files: ~w(lib README.md mix.exs),
       maintainers: ["Martin Frost"],
-      licenses: ["Apache 2.0"],
+      licenses: ["Apache-2.0"],
       links: %{"GitHub" => "https://github.com/Frost/isn"}
     ]
   end
