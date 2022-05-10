@@ -2,9 +2,6 @@ name: Elixir CI
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 permissions:
   contents: read
@@ -14,6 +11,14 @@ jobs:
 
     name: Build and test
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: isn
+          POSTGRES_PASSWORD: secret
+        ports:
+          - 5432:5432
 
     steps:
     - uses: actions/checkout@v3
@@ -32,3 +37,6 @@ jobs:
       run: mix deps.get
     - name: Run tests
       run: mix test
+      env:
+        POSTGRES_USER: isn
+        POSTGRES_PASSWORD: secret
