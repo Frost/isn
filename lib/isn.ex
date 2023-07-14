@@ -49,20 +49,20 @@ defmodule ISN do
   def encode(_opts) do
     quote do
       thing ->
-        [<<IO.iodata_length(thing)::int32>> | thing]
+        [<<IO.iodata_length(thing)::int32()>> | thing]
     end
   end
 
   def decode(:copy) do
     quote do
-      <<len::int32, thing::binary-size(len)>> ->
+      <<len::int32(), thing::binary-size(len)>> ->
         :binary.copy(thing)
     end
   end
 
   def decode(:reference) do
     quote do
-      <<len::int32, thing::binary-size(len)>> ->
+      <<len::int32(), thing::binary-size(len)>> ->
         thing
     end
   end
