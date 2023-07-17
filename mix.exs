@@ -47,11 +47,11 @@ defmodule ISN.Mixfile do
 
   defp deps do
     [
-      {:postgrex, "~> 0.16"},
+      {:postgrex, "~> 0.17"},
       {:ecto, "~> 3.0"},
       {:ecto_sql, "~> 3.0"},
       {:credo, "~> 1.0", only: :dev, runtime: false},
-      {:ex_doc, "~> 0.15", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.30", only: :dev, runtime: false},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
     ]
   end
