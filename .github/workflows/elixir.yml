@@ -10,7 +10,7 @@ jobs:
   build:
 
     name: Build and test
-    runs-on: ubuntu-latest
+    runs-on: "ubuntu:20.04"
     services:
       postgres:
         image: postgres
@@ -25,8 +25,8 @@ jobs:
     - name: Set up Elixir
       uses: erlef/setup-beam@61e01a43a562a89bfc54c7f9a378ff67b03e4a21
       with:
-        elixir-version: '1.13.4' # Define the elixir version [required]
-        otp-version: '24.3.4' # Define the OTP version [required]
+        elixir-version: '1.15.2' # Define the elixir version [required]
+        otp-version: '26.0.2' # Define the OTP version [required]
     - name: Restore dependencies cache
       uses: actions/cache@v3
       with:
