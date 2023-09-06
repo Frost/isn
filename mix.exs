@@ -52,6 +52,7 @@ defmodule ISN.Mixfile do
       {:ecto_sql, "~> 3.0"},
       {:credo, "~> 1.0", only: :dev, runtime: false},
       {:ex_doc, "~> 0.30", only: :dev, runtime: false},
+      {:makeup_html, ">= 0.0.0", only: :dev, runtime: false},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
     ]
   end
