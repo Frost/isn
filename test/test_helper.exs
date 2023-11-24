@@ -10,8 +10,8 @@ defmodule ISN.TestHelper do
       database: "isn_test"
     ]
 
-    db_user = System.get_env("POSTGRES_USER")
-    db_pass = System.get_env("POSTGRES_PASSWORD")
+    db_user = System.get_env("POSTGRES_USER", "isn")
+    db_pass = System.get_env("POSTGRES_PASSWORD", "isn")
 
     db_options =
       if db_user do
