@@ -87,6 +87,12 @@ for module <- ~w(ISBN ISMN ISSN ISBN13 ISMN13 ISSN13 UPC EAN13) do
             field :#{ecto_type}, ISN.#{module}
             # other fields
           end
+
+          def changeset(thing, changes) do
+            thing
+            |> cast(changes, #{ecto_type})
+            |> ISN.#{module}.validate()
+          end
         end
     """
 
@@ -100,5 +106,7 @@ for module <- ~w(ISBN ISMN ISSN ISBN13 ISMN13 ISSN13 UPC EAN13) do
     def load(isn), do: {:ok, to_string(isn)}
 
     def dump(isn), do: {:ok, to_string(isn)}
+
+    def validate(isn), do: ISN.Validator.validate(unquote(module_name), isn)
   end
 end
