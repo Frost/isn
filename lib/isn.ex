@@ -80,10 +80,10 @@ for module <- ~w(ISBN ISMN ISSN ISBN13 ISMN13 ISSN13 UPC EAN13) do
 
     How to use this in an Ecto.Model
 
-        defmodule MyApp.Book do
+        defmodule MyApp.Thing do
           use MyApp.Web, :model
 
-          schema "books" do
+          schema "things" do
             field :#{ecto_type}, ISN.#{module}
             # other fields
           end
