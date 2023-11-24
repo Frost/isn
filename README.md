@@ -41,7 +41,7 @@ end
 
 ```elixir
 defp deps do
-  [{:isn, "~> 2.0"}]
+  [{:isn, "~> 3.0"}]
 end
 ```
 
